@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: academic-backend
+  template:
+    metadata:
+      labels:
+        app: academic-backend
+    spec:
+      containers:
+      - name: backend
+        image: ghcr.io/yourusername/academic-backend:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DB_HOST
+          value: "db-service"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          value: "academicuser"
+        - name: DB_PASS
+          value: "academicpass"
+        - name: DB_NAME
+          value: "academicplatform"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: academic-frontend
+  template:
+    metadata:
+      labels:
+        app: academic-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: ghcr.io/yourusername/academic-frontend:latest
+        ports:
+        - containerPort: 3000

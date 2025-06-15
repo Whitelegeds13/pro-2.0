@@ -1,0 +1,16 @@
+{
+  "name": "Academic Platform",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-docker"
+  ],
+  "forwardPorts": [3000, 8000, 5432],
+  "postCreateCommand": "npm install && cd backend && npm install"
+}
